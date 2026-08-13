@@ -38,8 +38,8 @@ namespace SarajevoFilmFestival.Migrations
                     b.Property<int>("TicketCount")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("TotalPrice")
-                        .HasColumnType("INTEGER");
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 

@@ -95,7 +95,7 @@ public class FestivalService : IAppService
             rawTotal *= 0.85m; // 15% popusta
         }
         
-        int finalTotalPrice = (int)Math.Round(rawTotal);
+        decimal finalTotalPrice = Math.Round(rawTotal,2);
 
         var newBooking = new Booking
         {
@@ -121,7 +121,7 @@ public class FestivalService : IAppService
         return _bookingRepo.GetAll().Where(b => b.Status == BookingStatus.Cancelled).ToList();
         
     }
-    public int GetTotalRevenue()
+    public decimal GetTotalRevenue()
     {
         return _bookingRepo.GetAll().Where(b => b.Status == BookingStatus.Confirmed).Sum(b => b.TotalPrice);
     }

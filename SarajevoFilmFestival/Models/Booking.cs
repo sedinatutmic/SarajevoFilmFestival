@@ -13,6 +13,6 @@
         public int ScreeningID { get; set; }
         public int TicketCount { get; set; }
         public BookingStatus Status { get; set; }
-        public int TotalPrice { get; set; }
+        public decimal TotalPrice { get; set; }
         public DateTime CreatedAt { get; set; }
     }

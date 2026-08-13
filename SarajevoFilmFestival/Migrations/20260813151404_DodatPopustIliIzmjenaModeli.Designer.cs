@@ -11,8 +11,8 @@ using SarajevoFilmFestival.Data;
 namespace SarajevoFilmFestival.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20260813110815_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20260813151404_DodatPopustIliIzmjenaModeli")]
+    partial class DodatPopustIliIzmjenaModeli
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -42,7 +42,7 @@ namespace SarajevoFilmFestival.Migrations
                         .HasColumnType("INTEGER");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("INTEGER");
+                        .HasColumnType("TEXT");
 
                     b.HasKey("ID");
 

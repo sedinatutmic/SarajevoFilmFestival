@@ -10,7 +10,7 @@ public interface IAppService
     Booking assignBookingToCustomer(int customerId, int screeningId, int ticketCount);
 
     Dictionary<int, List<Booking>> GroupBookingByScreening();
-    int GetTotalRevenue();
+    decimal GetTotalRevenue();
     List<Booking> GetCancelledBookings();
     
     List<Customer>GetAllCustomers();
