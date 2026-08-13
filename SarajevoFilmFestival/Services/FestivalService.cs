@@ -16,9 +16,9 @@ public class FestivalService : IAppService
         Repository<Screening> screeningRepo
     )
     {
-        customerRepo=_customerRepo;
-        bookingRepo=_bookingRepo;
-        screeningRepo=_screeningRepo;
+        _customerRepo = customerRepo;
+        _bookingRepo=bookingRepo;
+        _screeningRepo = screeningRepo;
     }
 
     public Screening AddScreening(string title, DateTime date, decimal ticketPrice, int totalCapacity,
@@ -43,7 +43,7 @@ public class FestivalService : IAppService
             AvaliableSeats = avaliableSeats
         };
         _screeningRepo.Add(newScreening);
-        return new Screening();
+        return newScreening;
     }
 
     public Customer addCustomer(string name, string lastName, string email, int phoneNumber)
@@ -102,7 +102,7 @@ public class FestivalService : IAppService
             CustomerID = customerId,
             ScreeningID = screeningId,
             TicketCount = ticketCount,
-            TotalPrice = (int)(ticketCount * screening.TicketPrice),
+            TotalPrice = finalTotalPrice,
             CreatedAt = DateTime.Now,
             Status = BookingStatus.Confirmed
         };
