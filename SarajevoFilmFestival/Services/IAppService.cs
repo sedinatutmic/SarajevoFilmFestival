@@ -4,15 +4,13 @@ namespace SarajevoFilmFestival.Services;
 
 public interface IAppService
 {
-    Screening AddScreening(string title, int capacity, decimal ticketPrice, bool isActive);
-    void ActivateScreening(int screeningId);
-    void DeactivateScreening(int screeningId);
-
+    Screening AddScreening(string title, DateTime date, decimal ticketPrice, int totalCapacity, int avaliableSeats);
+    
     Customer addCustomer(string name, string lastName, string email, int phoneNumber);
     Booking assignBookingToCustomer(int customerId, int screeningId, int ticketCount);
 
     Dictionary<int, List<Booking>> GroupBookingByScreening();
-    Customer? GetCustomerWithMostTickets();
+    int GetTotalRevenue();
     List<Booking> GetCancelledBookings();
     
     List<Customer>GetAllCustomers();

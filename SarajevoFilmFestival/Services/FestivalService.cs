@@ -26,7 +26,7 @@ public class FestivalService : IAppService
     {
         if (totalCapacity <= 0 || totalCapacity > 500)
         {
-            throw new ArgumentException("Total capacity must be greater than 0 and less than or equal to 500!")
+            throw new ArgumentException("Total capacity must be greater than 0 and less than or equal to 500!");
         }
 
         if (ticketPrice <= 0)
@@ -87,6 +87,15 @@ public class FestivalService : IAppService
 
         screening.AvaliableSeats -= ticketCount;
         _screeningRepo.Update(screening);
+        
+        decimal rawTotal = ticketCount * screening.TicketPrice;
+    
+        if (ticketCount >= 5)
+        {
+            rawTotal *= 0.85m; // 15% popusta
+        }
+        
+        int finalTotalPrice = (int)Math.Round(rawTotal);
 
         var newBooking = new Booking
         {
@@ -100,4 +109,23 @@ public class FestivalService : IAppService
             _bookingRepo.Add(newBooking);
             return newBooking;
     }
-}
+
+    public Dictionary<int, List<Booking>> GroupBookingByScreening()
+    {
+        return _bookingRepo.GetAll().GroupBy(b => b.ScreeningID).ToDictionary(g => g.Key, g => g.ToList());
+        
+    }
+
+    public List<Booking> GetCancelledBookings()
+    {
+        return _bookingRepo.GetAll().Where(b => b.Status == BookingStatus.Cancelled).ToList();
+        
+    }
+    public int GetTotalRevenue()
+    {
+        return _bookingRepo.GetAll().Where(b => b.Status == BookingStatus.Confirmed).Sum(b => b.TotalPrice);
+    }
+    public List<Customer>GetAllCustomers()=>_customerRepo.GetAll().ToList();
+    public List<Screening> GetAllScreenings() => _screeningRepo.GetAll().ToList();
+    public List<Booking> GetAllBookings ()=> _bookingRepo.GetAll().ToList();
+    }
